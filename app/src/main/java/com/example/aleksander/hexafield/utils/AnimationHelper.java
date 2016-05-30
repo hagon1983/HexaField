@@ -7,7 +7,9 @@ import android.view.animation.AnimationUtils;
 import com.example.aleksander.hexafield.Cell;
 import com.example.aleksander.hexafield.R;
 import com.example.aleksander.hexafield.library.view.CellView;
+import com.example.aleksander.hexafield.library.view.GameFieldView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -22,9 +24,12 @@ public class AnimationHelper implements Animation.AnimationListener {
         clearAnimation.setAnimationListener(this);
     }
 
-    public void animate(Collection<CellView> cells) {
-        mCells = cells;
-        for (CellView cellView : cells) {
+    public void animateVanish(Collection<Cell> cells, GameFieldView gameFieldView) {
+        mCells = new ArrayList<>(cells.size());
+        for (Cell cell : cells) {
+            mCells.add(gameFieldView.getCellView(cell));
+        }
+        for (CellView cellView : mCells) {
             cellView.startAnimation(clearAnimation);
             cellView.getCell().setType(Cell.CELL_EMPTY);
         }

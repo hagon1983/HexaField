@@ -12,6 +12,9 @@ import java.util.Collection;
  */
 public class CanPutDetecdor {
 
+    /**
+     * Check if field have the suitable space for the figure
+     * */
     public static boolean hasRoomForFigure(GameField field, GameFigure figure){
         final int mapRadius = field.getMapRadius();
         for(int q = -mapRadius; q<= mapRadius; q++){

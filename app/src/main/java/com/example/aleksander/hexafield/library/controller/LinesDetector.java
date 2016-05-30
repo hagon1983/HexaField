@@ -2,8 +2,6 @@ package com.example.aleksander.hexafield.library.controller;
 
 import com.example.aleksander.hexafield.Cell;
 import com.example.aleksander.hexafield.library.model.GameField;
-import com.example.aleksander.hexafield.library.view.CellView;
-import com.example.aleksander.hexafield.library.view.GameFieldView;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,23 +12,26 @@ import java.util.Set;
  */
 public class LinesDetector {
 
-    public static Collection<CellView> detectLines(GameFieldView containerView) {
-        Collection<CellView> ret = new HashSet<CellView>();
-        GameField gameField = containerView.getGameField();
+    Set<Cell> tmp;
 
-        addSlashLines(containerView, gameField, ret);
-        addHorizontalLines(containerView, gameField, ret);
-        addBackSlashLines(containerView, gameField, ret);
+    public LinesDetector() {
+        this.tmp = new HashSet<>();
+    }
+
+    public Collection<Cell> detectLines(GameField gameField) {
+        Collection<Cell> ret = new HashSet<>();
+
+        addSlashLines(gameField, ret);
+        addHorizontalLines(gameField, ret);
+        addBackSlashLines(gameField, ret);
 
         return ret;
     }
 
 
-    private static void addSlashLines(GameFieldView containerView, final GameField gameField, Collection<CellView> ret) {
-        final int dimension = gameField.getDimension();
+    private void addSlashLines(final GameField gameField, Collection<Cell> ret) {
         final int mapRadius = gameField.getMapRadius();
 
-        Set<CellView> tmp = new HashSet<>(dimension);
         boolean addLine;
 
         for (int q = -mapRadius; q <= mapRadius; q++) {
@@ -43,7 +44,7 @@ public class LinesDetector {
                         addLine = false;
                         break;
                     } else if (cell.isFilled()) {
-                        tmp.add(containerView.getCellView(cell));
+                        tmp.add(cell);
                     }
                 }
             }
@@ -53,11 +54,9 @@ public class LinesDetector {
         }
     }
 
-    private static void addHorizontalLines(GameFieldView containerView, final GameField gameField, Collection<CellView> ret) {
-        final int dimension = gameField.getDimension();
+    private void addHorizontalLines(final GameField gameField, Collection<Cell> ret) {
         final int mapRadius = gameField.getMapRadius();
 
-        Set<CellView> tmp = new HashSet<>(dimension);
         boolean addLine;
 
         for (int r = -mapRadius; r <= mapRadius; r++) {
@@ -70,7 +69,7 @@ public class LinesDetector {
                         addLine = false;
                         break;
                     } else if (cell.isFilled()) {
-                        tmp.add(containerView.getCellView(cell));
+                        tmp.add(cell);
                     }
                 }
             }
@@ -80,11 +79,9 @@ public class LinesDetector {
         }
     }
 
-    private static void addBackSlashLines(GameFieldView containerView, final GameField grid, Collection<CellView> ret) {
-        final int dimension = grid.getDimension();
+    private void addBackSlashLines(final GameField grid, Collection<Cell> ret) {
         final int mapRadius = grid.getMapRadius();
 
-        Set<CellView> tmp = new HashSet<>(dimension);
         boolean addLine;
 
         for (int sum = -mapRadius; sum <= mapRadius; sum++) {
@@ -97,7 +94,7 @@ public class LinesDetector {
                         addLine = false;
                         break;
                     } else if (cell.isFilled()) {
-                        tmp.add(containerView.getCellView(cell));
+                        tmp.add(cell);
                     }
                 }
             }

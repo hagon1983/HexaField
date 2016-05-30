@@ -45,6 +45,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     private GameFieldView gameFieldView;
     private ArrayList<FigureView> dragableItems;
     private AnimationHelper animationHelper;
+    private LinesDetector linesDetector;
 
     public GameController(View rootView, GameFieldView gameFieldView) {
         this.rootView = rootView;
@@ -53,6 +54,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
 
         this.dragableItems = new ArrayList<>(3);
         animationHelper = new AnimationHelper(gameFieldView.getContext().getApplicationContext());
+        linesDetector = new LinesDetector();
     }
 
     public void startGame() {
@@ -78,7 +80,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         Bundle ret = new Bundle();
 
         final int numFigures = dragableItems.size();
-        ArrayList<Parcelable> figures = new ArrayList<Parcelable>();
+        ArrayList<Parcelable> figures = new ArrayList<>();
         for (int i = 0; i < numFigures; i++) {
             figures.add(dragableItems.get(i).getFigure());
         }
@@ -126,14 +128,12 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         FigureView item = (FigureView) event.getLocalState();
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                previousMarked = new HashSet<Cell>(item.getFigure().getItems().size());
+                previousMarked = new HashSet<>(item.getFigure().getItems().size());
                 // do nothing
                 break;
             case DragEvent.ACTION_DRAG_ENTERED:
-//                setBackgroundDrawable(enterShape);
                 break;
             case DragEvent.ACTION_DRAG_EXITED:
-//                setBackgroundDrawable(normalShape);
                 break;
             case DragEvent.ACTION_DROP:
                 if (bMayDrop) {
@@ -207,9 +207,10 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     }
 
     private void checkLines() {
-        Collection<CellView> views = LinesDetector.detectLines(gameFieldView);
-        if (!views.isEmpty()) {
-            animationHelper.animate(views);
+        Collection<Cell> cells = linesDetector.detectLines(gameFieldView.getGameField());
+        if (!cells.isEmpty()) {
+            //vanish line(s)
+            animationHelper.animateVanish(cells, gameFieldView);
         }
     }
 
