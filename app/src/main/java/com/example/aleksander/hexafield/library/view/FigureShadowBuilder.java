@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * Created by aleksander on 30.10.15.
  */
 public class FigureShadowBuilder extends View.DragShadowBuilder {
+    private static final String TAG = "FigureShadowBuilder";
     private Path mPath = new Path();
     private Paint mPaint;
     private RectF bounds;
@@ -33,7 +34,7 @@ public class FigureShadowBuilder extends View.DragShadowBuilder {
             ArrayList<PointF> corners = LayoutHelper.polygonCorners(layoutHelper, hex, 0.8f);
             for (int j = 0, numCorners = corners.size(); j < numCorners; j++) {
                 PointF corner = corners.get(j);
-                Log.i(getClass().getSimpleName(), "Add corner: " + corner);
+                Log.i(TAG, "Add corner: " + corner);
                 if (j == 0) {
                     mPath.moveTo(corner.x, corner.y);
                     if (bounds == null) {
@@ -63,7 +64,7 @@ public class FigureShadowBuilder extends View.DragShadowBuilder {
             }
         }
 
-        Log.e(getClass().getSimpleName(), "BOUNDS: " + bounds.toShortString());
+        Log.i(TAG, "BOUNDS: " + bounds.toShortString());
     }
 
     @Override

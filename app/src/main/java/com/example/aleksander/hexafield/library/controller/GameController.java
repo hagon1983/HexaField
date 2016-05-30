@@ -33,6 +33,8 @@ import java.util.Set;
  */
 public class GameController implements View.OnTouchListener, View.OnDragListener {
 
+    private static final String TAG = "GameController";
+
     private static final String BUNDLE_KEY_HEX_CONTAINER = "hexContainer";
     private static final String BUNDLE_KEY_FIGURES = "figures";
 
@@ -140,10 +142,9 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
                 break;
             case DragEvent.ACTION_DRAG_LOCATION:
                 bMayDrop = true;
-                Log.e(getClass().getSimpleName(), " x: " + event.getX() + "\t y: " + event.getY());
+                Log.i(TAG, " x: " + event.getX() + "\t y: " + event.getY());
                 FractionalHex fractionalHex = LayoutHelper.pixelToHex(getGameFieldView().getLayoutHelper(), new PointF(event.getX() - gameFieldView.getOffsetInRoot(rootView).x, event.getY() - gameFieldView.getOffsetInRoot(rootView).y));
                 Hex centralHex = FractionalHex.hexRound(fractionalHex);
-//                Log.e(getClass().getSimpleName(), "Central Hex: " + centralHex.q + " : " + centralHex.r);
 
                 HashSet<Cell> cells = new HashSet<>(item.getFigure().getItems().size());
 
