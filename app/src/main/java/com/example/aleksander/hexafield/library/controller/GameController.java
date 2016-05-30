@@ -58,6 +58,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         for (int i = 0; i < dragableItems.size(); i++) {
             dragableItems.get(i).setFigure(FigureFactory.createFigure(FIGURE_RADIUS));
         }
+        checkConstraints();
     }
 
     public void resumeGame(Bundle bundle) {
@@ -68,7 +69,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         for (int i = 0, num = figures.size(); i < num; i++) {
             dragableItems.get(i).setFigure(figures.get(i));
         }
-
+        checkConstraints();
     }
 
     public Bundle saveGame() {
@@ -187,8 +188,7 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     private void performDrop(FigureView item) {
         markDroppedCells();
         generateNextFigure(item);
-        checkLines();
-        checkGameOver();
+        checkConstraints();
     }
 
     private void markDroppedCells() {
@@ -220,6 +220,11 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
                 figureView.setBackgroundColor(Color.RED);
             }
         }
+    }
+
+    private void checkConstraints(){
+        checkLines();
+        checkGameOver();
     }
 
 }
