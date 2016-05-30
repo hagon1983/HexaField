@@ -27,11 +27,6 @@ public class CellView extends View {
     private Paint mBackPaint;
     private Path mBackPath = new Path();
 
-    @Override
-    public void setScaleX(float scaleX) {
-        super.setScaleX(scaleX);
-    }
-
     public CellView(Context context) {
         this(context, null);
     }
@@ -58,9 +53,9 @@ public class CellView extends View {
         for (int i = 0, num = corners.size(); i < num; i++) {
             PointF p = corners.get(i);
             if (i == 0) {
-                mPath.moveTo((float) (p.x - left), (float) (p.y - top));
+                mPath.moveTo(p.x - left, p.y - top);
             } else {
-                mPath.lineTo((float) (p.x - left), (float) (p.y - top));
+                mPath.lineTo(p.x - left, p.y - top);
             }
         }
         mPath.close();
@@ -70,9 +65,9 @@ public class CellView extends View {
         for (int i = 0, num = cornersBackground.size(); i < num; i++) {
             PointF p = cornersBackground.get(i);
             if (i == 0) {
-                mBackPath.moveTo((float) (p.x - left), (float) (p.y - top));
+                mBackPath.moveTo(p.x - left, p.y - top);
             } else {
-                mBackPath.lineTo((float) (p.x - left), (float) (p.y - top));
+                mBackPath.lineTo(p.x - left, p.y - top);
             }
         }
         mBackPath.close();

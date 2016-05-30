@@ -8,9 +8,7 @@ public class Hex {
     {
         this.q = q;
         this.r = r;
-        this.s = s;
     }
     public final int q;
     public final int r;
-    public final int s;
 }

@@ -16,8 +16,8 @@ import java.util.Collection;
  * Created by aleksander on 30.10.15.
  */
 public class AnimationHelper implements Animation.AnimationListener {
-    Collection<CellView> mCells;
-    private Animation clearAnimation;
+    private Collection<CellView> mCells;
+    private final Animation clearAnimation;
 
     public AnimationHelper(Context context) {
         clearAnimation = AnimationUtils.loadAnimation(context, R.anim.clear_cellview);

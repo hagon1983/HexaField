@@ -12,7 +12,7 @@ import com.example.aleksander.hexafield.Cell;
 public class GameField implements Parcelable{
 
     private SparseArray<SparseArray<Cell>> model;
-    protected int mapRadius;
+    private int mapRadius;
 
     public GameField(final int mapRadius) {
         this.model = new SparseArray<>(2 * mapRadius + 1);
@@ -28,10 +28,10 @@ public class GameField implements Parcelable{
         return tmp.get(r);
     }
 
-    public void setCell(int q, int r, Cell cell) {
+    private void setCell(int q, int r, Cell cell) {
         SparseArray<Cell> tmp = model.get(q);
         if (tmp == null) {
-            tmp = new SparseArray<Cell>();
+            tmp = new SparseArray<>();
             model.put(q, tmp);
         }
         tmp.put(r, cell);

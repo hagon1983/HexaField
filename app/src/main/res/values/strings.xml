@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HexaField</string>
     <string name="crash_toast_test">App has been crashed, but i\'ll got an report</string>
+    <string name="menu_restart">Restart</string>
 </resources>

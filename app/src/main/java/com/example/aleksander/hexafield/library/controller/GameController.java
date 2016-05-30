@@ -38,12 +38,12 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     private static final String BUNDLE_KEY_HEX_CONTAINER = "hexContainer";
     private static final String BUNDLE_KEY_FIGURES = "figures";
 
-    final int FIGURE_RADIUS = 2;
-    final int MAP_RADIUS = 4;
+    private final int FIGURE_RADIUS = 2;
+    private final int MAP_RADIUS = 4;
 
     private View rootView;
     private GameFieldView gameFieldView;
-    private ArrayList<FigureView> dragableItems;
+    private ArrayList<FigureView> draggableItems;
     private AnimationHelper animationHelper;
     private LinesDetector linesDetector;
 
@@ -52,15 +52,15 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         this.gameFieldView = gameFieldView;
         rootView.setOnDragListener(this);
 
-        this.dragableItems = new ArrayList<>(3);
+        this.draggableItems = new ArrayList<>(3);
         animationHelper = new AnimationHelper(gameFieldView.getContext().getApplicationContext());
         linesDetector = new LinesDetector();
     }
 
     public void startGame() {
         gameFieldView.setGameField(new GameField(MAP_RADIUS));
-        for (int i = 0; i < dragableItems.size(); i++) {
-            dragableItems.get(i).setFigure(FigureFactory.createFigure(FIGURE_RADIUS));
+        for (int i = 0; i < draggableItems.size(); i++) {
+            draggableItems.get(i).setFigure(FigureFactory.createFigure(FIGURE_RADIUS));
         }
         checkConstraints();
     }
@@ -70,8 +70,8 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
         gameFieldView.setGameField(gameField);
 
         ArrayList<GameFigure> figures = bundle.getParcelableArrayList(BUNDLE_KEY_FIGURES);
-        for (int i = 0, num = figures.size(); i < num; i++) {
-            dragableItems.get(i).setFigure(figures.get(i));
+        for (@SuppressWarnings("ConstantConditions") int i = 0, num = figures.size(); i < num; i++) {
+            draggableItems.get(i).setFigure(figures.get(i));
         }
         checkConstraints();
     }
@@ -79,10 +79,10 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     public Bundle saveGame() {
         Bundle ret = new Bundle();
 
-        final int numFigures = dragableItems.size();
+        final int numFigures = draggableItems.size();
         ArrayList<Parcelable> figures = new ArrayList<>();
         for (int i = 0; i < numFigures; i++) {
-            figures.add(dragableItems.get(i).getFigure());
+            figures.add(draggableItems.get(i).getFigure());
         }
 
         ret.putParcelable(BUNDLE_KEY_HEX_CONTAINER, gameFieldView.getGameField());
@@ -91,17 +91,17 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     }
 
 
-    public GameFieldView getGameFieldView() {
+    private GameFieldView getGameFieldView() {
         return gameFieldView;
     }
 
-    public void addDragableItem(FigureView dragableItem) {
-        dragableItems.add(dragableItem);
-        setDragListeners(dragableItem);
+    public void addDraggableItem(FigureView draggableItem) {
+        draggableItems.add(draggableItem);
+        setDragListeners(draggableItem);
     }
 
-    private void setDragListeners(FigureView dragableItem) {
-        dragableItem.setOnTouchListener(this);
+    private void setDragListeners(FigureView draggableItem) {
+        draggableItem.setOnTouchListener(this);
     }
 
     @Override
@@ -215,8 +215,8 @@ public class GameController implements View.OnTouchListener, View.OnDragListener
     }
 
     private void checkGameOver() {
-        for (FigureView figureView : dragableItems) {
-            if (CanPutDetecdor.hasRoomForFigure(gameFieldView.getGameField(), figureView.getFigure())) {
+        for (FigureView figureView : draggableItems) {
+            if (CanPutDetector.hasRoomForFigure(gameFieldView.getGameField(), figureView.getFigure())) {
                 figureView.setBackgroundColor(Color.GREEN);
             } else {
                 figureView.setBackgroundColor(Color.RED);

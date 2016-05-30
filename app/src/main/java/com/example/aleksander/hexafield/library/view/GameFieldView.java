@@ -19,6 +19,7 @@ import java.util.Map;
 /**
  * Created by aleksander on 24.10.15.
  */
+@SuppressWarnings("deprecation")
 public class GameFieldView extends AbsoluteLayout {
     private int childSize = -1;
 
@@ -76,7 +77,7 @@ public class GameFieldView extends AbsoluteLayout {
         return offsetInRoot;
     }
 
-    final int getDimension() {
+    private int getDimension() {
         return gameField.getDimension();
     }
 
@@ -100,13 +101,13 @@ public class GameFieldView extends AbsoluteLayout {
         }
     }
 
-    void calcChildSizeAndOffsets() {
+    private void calcChildSizeAndOffsets() {
         if (childSize <= 0) {
             if (getMeasuredWidth() == 0) {
                 throw new IllegalStateException("View is not measured yet");
             }
             if (gameField == null) {
-                throw new IllegalStateException("libraryGrig should be specified");
+                throw new IllegalStateException("gameField should be specified");
             }
 
             float h1 = (4 * getMeasuredHeight()) / (3 * getDimension() + 1);
@@ -120,7 +121,7 @@ public class GameFieldView extends AbsoluteLayout {
         }
     }
 
-    void resetChildSizeAndOffsets() {
+    private void resetChildSizeAndOffsets() {
         childSize = -1;
         offsetInRoot = null;
     }

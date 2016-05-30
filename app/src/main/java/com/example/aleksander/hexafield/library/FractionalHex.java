@@ -10,9 +10,9 @@ public class FractionalHex {
         this.s = s;
     }
 
-    public final double q;
-    public final double r;
-    public final double s;
+    private final double q;
+    private final double r;
+    private final double s;
 
     static public Hex hexRound(FractionalHex h) {
         int q = (int) (Math.round(h.q));

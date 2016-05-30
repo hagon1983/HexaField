@@ -13,6 +13,7 @@ import com.example.aleksander.hexafield.library.model.GameFigure;
 /**
  * Created by aleksander on 28.10.15.
  */
+@SuppressWarnings("deprecation")
 public class FigureView extends AbsoluteLayout {
 
     private GameFigure figure;
@@ -52,13 +53,13 @@ public class FigureView extends AbsoluteLayout {
         }
     }
 
-    void calcChildSizeAndOffsets() {
+    private void calcChildSizeAndOffsets() {
         if (childSize <= 0) {
             if (getMeasuredWidth() == 0) {
                 throw new IllegalStateException("View is not measured yet");
             }
             if (figure == null) {
-                throw new IllegalStateException("libraryGrig should be specified");
+                throw new IllegalStateException("figure should be specified");
             }
 
             float h1 = (4 * getMeasuredHeight()) / (3 * figure.getDimension() + 1);
@@ -72,7 +73,7 @@ public class FigureView extends AbsoluteLayout {
         }
     }
 
-    void resetChildSizeAndOffsets() {
+    private void resetChildSizeAndOffsets() {
         childSize = -1;
     }
 

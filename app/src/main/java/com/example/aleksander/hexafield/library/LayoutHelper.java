@@ -14,9 +14,9 @@ public class LayoutHelper {
         this.origin = origin;
     }
 
-    public final Orientation orientation;
-    public final PointF size;
-    public final PointF origin;
+    private final Orientation orientation;
+    private final PointF size;
+    private final PointF origin;
     static public Orientation pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0, Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
 
     static public PointF hexToPixel(LayoutHelper layoutHelper, Hex h) {
@@ -39,7 +39,7 @@ public class LayoutHelper {
         return new FractionalHex(q, r, -q - r);
     }
 
-    static public PointF hexCornerOffset(LayoutHelper layoutHelper, int corner, float scale) {
+    private static PointF hexCornerOffset(LayoutHelper layoutHelper, int corner, float scale) {
         Orientation M = layoutHelper.orientation;
         PointF size = layoutHelper.size;
         double angle = 2.0 * Math.PI * (corner + M.start_angle) / 6;

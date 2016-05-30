@@ -15,7 +15,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String TAG = "GameActivity";
     private GameController gameController;
-    final String BUNDLE_KE_GAME_CONTROLLER = "game_controller";
+    private final String BUNDLE_KE_GAME_CONTROLLER = "game_controller";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,9 @@ public class GameActivity extends AppCompatActivity {
         FigureView child3 = (FigureView) findViewById(R.id.tool3);
 
         gameController = new GameController(rootView, container);
-        gameController.addDragableItem(child1);
-        gameController.addDragableItem(child2);
-        gameController.addDragableItem(child3);
+        gameController.addDraggableItem(child1);
+        gameController.addDraggableItem(child2);
+        gameController.addDraggableItem(child3);
 
     }
 

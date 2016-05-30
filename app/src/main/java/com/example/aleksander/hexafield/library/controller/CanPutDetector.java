@@ -5,12 +5,10 @@ import com.example.aleksander.hexafield.library.Hex;
 import com.example.aleksander.hexafield.library.model.GameField;
 import com.example.aleksander.hexafield.library.model.GameFigure;
 
-import java.util.Collection;
-
 /**
  * Created by aleksander on 31.10.15.
  */
-public class CanPutDetecdor {
+class CanPutDetector {
 
     /**
      * Check if field have the suitable space for the figure
@@ -37,7 +35,7 @@ public class CanPutDetecdor {
         }
 
         return false;
-    };
+    }
 
 
 }

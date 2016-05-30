@@ -10,9 +10,9 @@ import java.util.Set;
 /**
  * Created by aleksander on 30.10.15.
  */
-public class LinesDetector {
+class LinesDetector {
 
-    Set<Cell> tmp;
+    private Set<Cell> tmp;
 
     public LinesDetector() {
         this.tmp = new HashSet<>();

@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * Created by aleksander on 23.10.15.
  */
 public class Cell implements Parcelable{
-    public static  final int CELL_PLACEHOLDER = 0;
+    private static  final int CELL_PLACEHOLDER = 0;
     public static  final int CELL_EMPTY = 1;
     public static  final int CELL_FILLED = 2;
 

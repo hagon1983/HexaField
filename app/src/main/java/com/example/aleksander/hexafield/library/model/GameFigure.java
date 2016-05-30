@@ -21,7 +21,7 @@ public class GameFigure implements Parcelable {
     final public static int TYPE_CROSS = 6;
     final public static int NUM_TYPES = TYPE_CROSS + 1;
 
-    protected HashSet<Hex> items;
+    private HashSet<Hex> items;
     private int mapRadius;
 
     public GameFigure(int mapRadius) {
@@ -29,7 +29,7 @@ public class GameFigure implements Parcelable {
         this.items = new HashSet<>();
     }
 
-    protected void addItem(int q, int r) {
+    void addItem(int q, int r) {
         items.add(new Hex(q, r, -q - r));
     }
 
